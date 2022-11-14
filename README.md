@@ -16,4 +16,4 @@ below is the table of BF commands and their equivalent in resricted BF:
 | `<` | `<` |
 | `>` | `+<+` |
 
-finally, it compiles this to CTF.
+finally, it compiles this to CTF. since CTF is atleast as efficient as a clockwise turing machine, this means that the compiled CTF will take O(t^2) time to run for the source BF program running in O(t), as shown in the above thesis.
