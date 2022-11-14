@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "btc"
+name = "btcc"
 version = "0.1.0"
