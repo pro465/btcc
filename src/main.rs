@@ -154,16 +154,31 @@ impl Translator {
             }
 
             b'[' => {
-                self.nl();
                 let start = self.line;
-                self.handle_edges(1);
-                self.push(&[0, 1, 1, 0]);
+                self.jmp(0, 3);
+                self.push(&[0, 1]);
+                self.pop();
+                self.jmp(1, 0);
+                self.push(&[0, 0]);
+                self.pop();
+                self.jmp(0, 2);
 
+                self.nl();
+                self.push(&[1]);
+                self.pop();
+                self.jmp(3, 0);
+                self.push(&[0]);
+
+                self.nl();
+                self.pop();
+                self.pop();
+
+                self.nl();
                 let jmp_idx = self.res.len();
                 self.jmp(0, 0);
-                self.nl();
 
-                self.push(&[0, 1, 1, 1]);
+                self.nl();
+                self.push(&[1]);
                 self.pop();
                 self.pop();
 
@@ -303,6 +318,7 @@ impl Translator {
 
                 self.nl();
                 self.pop();
+                self.nl();
             }
 
             _ => {}
