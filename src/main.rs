@@ -84,7 +84,8 @@ fn turn_into_ctf(prog: &[Command]) -> String {
                 }
             }
             Jmp(x, y) => {
-                ret.extend(format!("[{x}|{y}]").chars());
+                let f = |&x: &usize| if x == 0 { String::new() } else { x.to_string() };
+                ret.extend(format!("[{}|{}]", f(x), f(y)).chars());
                 continue;
             }
         });
@@ -179,16 +180,13 @@ impl Translator {
             b';' => {
                 self.jmp(0, 4);
                 {
+                    self.push(&[0, 1]);
                     self.pop();
                     self.jmp(0, 3);
                     {
+                        self.push(&[1]);
                         self.pop();
-                        self.jmp(0, 1);
-                        self.push(&[0, 1, 1, 1]);
-                        self.jmp(2, 2);
-                        self.nl();
-                        self.push(&[0, 1, 1, 0]);
-                        self.nl();
+                        self.dup();
                         self.output();
                         self.pop();
                         self.pop();
@@ -201,8 +199,7 @@ impl Translator {
                         self.pop();
                         self.pop();
                         self.pop();
-                        self.push(&[0, 1, 0, 0]);
-                        self.push(&[0, 1, 1, 0]);
+                        self.push(&[0, 0]);
                         self.jmp(2, 2);
                     }
                 }
