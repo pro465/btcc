@@ -16,4 +16,8 @@ below is the table of BF commands and their equivalent in resricted BF:
 | `<` | `<` |
 | `>` | `+<+` |
 
-finally, it compiles this to CTF. since CTF is atleast as efficient as a clockwise turing machine, this means that the compiled CTF will take O(t^2) time to run for the source BF program running in O(t), as shown in the above thesis.
+finally, it compiles this to CTF. each bit in boolfuck uses 4 bits in CTF. the first two bits tell if this is the R marker or the L marker. the thrid bit stores the value if the current cell is neither, 0 otherwise.
+
+the fourth bit is the Y symbol marker used to move left by one cell..
+
+since CTF is atleast as efficient as a clockwise turing machine, this means that the compiled CTF will take O(t^2) time to run for the source BF program running in O(t), as shown in the above thesis.
